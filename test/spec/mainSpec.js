@@ -48,4 +48,45 @@ describe('The div', function(){
     expect(newPosition.left).toBe(oldPosition.left + 30);
   });
 
+  it('Validates next move - should not move up', function() {
+    var key = $.Event('keydown');
+    key.keyCode = 38;
+    expect(validateMove(key, 100, 100, { top: 25, left: 25 })).toBe(false);
+  });
+
+});
+
+describe('Move Validation', function(){
+
+  it('should not move up', function() {
+      var key = $.Event('keydown');
+      key.keyCode = 38;
+      expect(validateMove(key, 100, 100, { top: 25, left: 25 })).toBe(false);
+    });
+
+  it('should not move down', function() {
+        var key = $.Event('keydown');
+        key.keyCode = 40;
+        expect(validateMove(key, 100, 100, { top: 75, left: 75 })).toBe(false);
+      });
+
+  it('should not move left', function() {
+        var key = $.Event('keydown');
+        key.keyCode = 37;
+        expect(validateMove(key, 100, 100, { top: 10, left: 10 })).toBe(false);
+      });
+
+
+  it('should not move right', function() {
+          var key = $.Event('keydown');
+          key.keyCode = 39;
+          expect(validateMove(key, 100, 100, { top: 50, left: 75 })).toBe(false);
+        });
+
+  it('should down', function() {
+          var key = $.Event('keydown');
+          key.keyCode = 40;
+          expect(validateMove(key, 100, 100, { top: 50, left: 75 })).toBe(false);
+        });
+
 });
