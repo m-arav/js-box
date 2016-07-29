@@ -14,15 +14,38 @@ describe('The div', function(){
 
     loadFixtures('index.html');
     box = $('.box');
-   $.holdReady(false);
+    $.holdReady(false);
+    oldPosition = box.position();
 
   });
 
-  it('moves',function(){
-    var oldPosition = box.position();
-    $(document).trigger('keydown');
+  it('moves down',function(){
+    var key = $.Event('keydown');
+    key.keyCode = 40;
+    $(document).trigger(key);
     var newPosition = box.position();
-    expect(newPosition.top).not.toBe(oldPosition.top);
-    expect(newPosition.left).not.toBe(oldPosition.left);
+    expect(newPosition.top).toBe(oldPosition.top + 30);
   });
+  it('moves left',function(){
+    var key = $.Event('keydown');
+    key.keyCode = 37;
+    $(document).trigger(key);
+    var newPosition = box.position();
+    expect(newPosition.left).toBe(oldPosition.left - 30);
+  });
+  it('moves up',function(){
+    var key = $.Event('keydown');
+    key.keyCode = 38;
+    $(document).trigger(key);
+    var newPosition = box.position();
+    expect(newPosition.top).toBe(oldPosition.top - 30);
+  });
+  it('moves right',function(){
+    var key = $.Event('keydown');
+    key.keyCode = 39;
+    $(document).trigger(key);
+    var newPosition = box.position();
+    expect(newPosition.left).toBe(oldPosition.left + 30);
+  });
+
 });
